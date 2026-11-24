@@ -23,3 +23,4 @@ npm run dev
 ## Дизайн
 
 Макеты в Claude Design: https://claude.ai/artifact/D1Z8BB57nsS3G1Th4Uy8p6
+# productCase
