@@ -1,0 +1,30 @@
+.tabs {
+  display: flex;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.tab {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font: 400 13px var(--font-inter), sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.tab:hover {
+  border-color: var(--border-input);
+}
+
+.tabActive {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: #ffffff;
+}

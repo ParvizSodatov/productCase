@@ -1,0 +1,332 @@
+/* ============================================================
+   Лендинг
+   ============================================================ */
+
+/* ---------- Первый экран ---------- */
+
+.hero {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 72px var(--page-x) 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+}
+
+.heroText {
+  /* 460px — ширина, ниже которой колонка переносится под ленту */
+  flex: 1 1 460px;
+  min-width: 0;
+}
+
+.badge {
+  margin: 0 0 20px;
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  font-size: 14px;
+  color: #4a4d52;
+}
+
+.title {
+  margin: 0;
+  font-size: 60px;
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  color: var(--accent);
+}
+
+.lead {
+  margin: 24px 0 0;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+.heroActions {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btnPrimary,
+.btnSecondary {
+  padding: 16px 24px;
+  border-radius: var(--r-md);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btnPrimary:hover {
+  background: #a53709;
+  color: var(--on-accent);
+}
+
+.btnSecondary {
+  border: 1px solid var(--border-input);
+}
+
+.note {
+  margin: 20px 0 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------- Карточка с лентой топа ---------- */
+
+.feed {
+  flex: 1 1 440px;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  /* Якорь #feed не должен прятаться под шапку при прокрутке */
+  scroll-margin-top: 24px;
+}
+
+.feedHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.feedTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.disclaimer {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- Общие заголовки секций ---------- */
+
+.section {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 80px var(--page-x);
+  scroll-margin-top: 24px;
+}
+
+.sectionTight {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--page-x) 80px;
+}
+
+.sectionTitle,
+.sectionTitleSpaced {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.sectionTitleSpaced {
+  margin-bottom: 40px;
+}
+
+.sectionLead {
+  margin: 12px 0 40px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 640px;
+}
+
+/* ---------- Полоса категорий ---------- */
+
+.band {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.bandInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 80px var(--page-x);
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.categoryCard {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-soft);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.categoryCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .categoryCard:hover {
+    transform: none;
+  }
+}
+
+.categoryName {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.categoryExamples {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* ---------- Как это работает ---------- */
+
+.stepGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.step {
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+
+.stepNumber {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--accent);
+}
+
+.stepTitle {
+  margin: 12px 0 8px;
+  font-size: 20px;
+}
+
+.stepText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* ---------- Для кого ---------- */
+
+.audienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.audience {
+  padding: 28px;
+  border-top: 3px solid var(--dark);
+}
+
+.audienceTitle {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+/* ---------- Тёмный блок со сбором контактов ---------- */
+
+.ctaWrap {
+  padding: 0 var(--page-x) 80px;
+}
+
+.cta {
+  max-width: var(--container);
+  margin: 0 auto;
+  background: var(--dark);
+  color: var(--on-dark);
+  border-radius: var(--r-2xl);
+  padding: 56px 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+}
+
+.ctaText {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+.ctaTitle {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.ctaLead {
+  margin: 16px 0 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+}
+
+/* ---------- Мобильные правки ---------- */
+
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 40px;
+    padding-bottom: 48px;
+    gap: 32px;
+  }
+
+  .title {
+    font-size: 38px;
+  }
+
+  .lead {
+    font-size: 17px;
+  }
+
+  .sectionTitle,
+  .sectionTitleSpaced,
+  .ctaTitle {
+    font-size: 28px;
+  }
+
+  .section,
+  .bandInner {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .cta {
+    padding: 32px 24px;
+  }
+}

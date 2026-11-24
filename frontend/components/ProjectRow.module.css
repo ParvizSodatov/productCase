@@ -1,0 +1,104 @@
+/* Общая раскладка строки: логотип — текст — кнопка голоса */
+.rowFeed,
+.rowList {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Лента на лендинге: разделитель сверху, компактнее */
+.rowFeed {
+  padding: 14px 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* Список в категории: разделитель снизу, свободнее */
+.rowList {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/* --- Логотип-заглушка с первой буквой названия --- */
+
+.markFeed,
+.markList {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  color: var(--accent);
+  border-radius: var(--r-md);
+}
+
+.markFeed {
+  width: 52px;
+  height: 52px;
+  background: #f1eee6;
+  font-size: 18px;
+}
+
+.markList {
+  width: 56px;
+  height: 56px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 20px;
+}
+
+/* --- Текстовая часть --- */
+
+.body {
+  /* min-width: 0 обязателен, иначе длинное название растянет строку
+     и сломает раскладку на узком экране */
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.rowList .name {
+  font-size: 17px;
+}
+
+.tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.rowList .tagline {
+  font-size: 15px;
+}
+
+.categories {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.tags {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 3px 10px;
+  background: var(--surface-muted);
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* В ленте на лендинге кнопка голоса чуть меньше, чем в списке категории:
+   56×60 против 60×64 — как в макете */
+.rowFeed > button {
+  width: 56px;
+  height: 60px;
+}

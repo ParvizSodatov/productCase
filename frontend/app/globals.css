@@ -1,0 +1,159 @@
+/* ============================================================
+   ProductCase — глобальные стили и токены дизайна
+
+   Все цвета и размеры объявлены переменными. Менять оформление
+   нужно здесь, а не в компонентах — так позже легко добавить
+   тёмную тему: достаточно переопределить переменные.
+   ============================================================ */
+
+:root {
+  /* --- Фон и поверхности --- */
+  --bg: #f6f5f1;              /* основной тёплый фон страницы */
+  --surface: #ffffff;         /* карточки, панели */
+  --surface-soft: #fbfaf7;    /* карточки категорий, зоны загрузки */
+  --surface-muted: #efede7;   /* теги, аватары-заглушки */
+  --placeholder: #e9e6dd;     /* заглушки под скриншоты */
+
+  /* --- Текст --- */
+  --text: #111418;            /* основной, почти чёрный */
+  --text-strong: #2e3135;     /* длинные абзацы */
+  --text-secondary: #44474c;  /* подписи, описания */
+  --text-muted: #5c5f64;      /* мелкие пояснения */
+
+  /* --- Границы --- */
+  --border: #e3e1da;
+  --border-soft: #efede7;     /* разделители внутри списков */
+  --border-strong: #d9d6cc;   /* поля ввода */
+  --border-input: #c9c6bc;    /* вторичные кнопки */
+
+  /* --- Акцент --- */
+  --accent: #b93e0e;          /* жжёный апельсин */
+  --accent-light: #e8693a;    /* акцент на тёмном фоне */
+
+  /* --- Тёмные блоки (CTA, баннеры) --- */
+  --dark: #111418;
+  --dark-surface: #1c1f24;    /* поля ввода на тёмном */
+  --dark-border: #3a3d42;
+  --on-dark: #f6f5f1;         /* текст на тёмном */
+  --on-dark-muted: #c9c7c0;
+  --on-accent: #ffffff;       /* текст на акцентной кнопке */
+
+  /* --- Радиусы --- */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 24px;
+  --r-pill: 999px;
+
+  /* --- Тени --- */
+  --shadow-menu: 0 16px 40px rgba(17, 20, 24, 0.12);
+
+  /* --- Сетка страницы --- */
+  --container: 1200px;
+  --page-x: 24px;            /* боковые отступы, на мобильном уменьшаются */
+}
+
+/* На узких экранах отступы по краям меньше */
+@media (max-width: 600px) {
+  :root {
+    --page-x: 16px;
+  }
+}
+
+/* ============================================================
+   Сброс и базовая типографика
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Плавная прокрутка к #feed, #how и прочим якорям */
+  scroll-behavior: smooth;
+}
+
+/* Уважаем системную настройку «меньше движения» */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 16px;
+  /* В макете межстрочный интервал по умолчанию — normal (около 1.2).
+     С 1.5 все кнопки, строки и карточки становятся выше, чем в дизайне.
+     Там, где нужен воздух (абзацы), line-height задан явно в модулях. */
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-manrope), var(--font-inter), sans-serif;
+  /* Как в макете: без общего сужения. Где оно нужно (крупные заголовки),
+     letter-spacing задан в стилях конкретного заголовка. */
+  letter-spacing: normal;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+button {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Видимая рамка фокуса для клавиатуры — нужна для доступности.
+   :focus-visible не срабатывает на обычный клик мышью. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Утилиты
+   ============================================================ */
+
+/* Центрирующий контейнер страницы */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--page-x);
+}
+
+/* Текст только для скринридеров (подписи к полям, которые
+   визуально заменены плейсхолдером) */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

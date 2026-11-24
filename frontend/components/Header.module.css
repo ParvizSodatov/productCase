@@ -1,0 +1,72 @@
+.header {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  /* position и z-index нужны выпадающему меню категорий:
+     оно позиционируется относительно шапки и лежит поверх страницы */
+  position: relative;
+  z-index: 5;
+}
+
+.nav {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 16px var(--page-x);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  font-size: 15px;
+  /* Забирает свободное место, прижимая кнопки справа к краю */
+  flex: 1 1 auto;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.signin {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.cta {
+  padding: 12px 20px;
+  background: var(--dark);
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cta:hover {
+  color: #ffffff;
+  background: #22262c;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: var(--r-pill);
+  background: var(--dark);
+  color: var(--on-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.avatar:hover {
+  color: var(--on-dark);
+}

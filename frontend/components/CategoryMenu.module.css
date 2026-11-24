@@ -1,0 +1,69 @@
+.wrap {
+  /* Отрицательные отступы, чтобы кнопка визуально стояла в одну линию
+     с обычными ссылками меню, несмотря на свой внутренний padding */
+  margin: -8px -12px;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  font: 400 15px var(--font-inter), sans-serif;
+  color: var(--text);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.trigger:hover {
+  color: var(--accent);
+}
+
+/* Активный раздел (страница категории) и открытое меню — акцентом */
+.current,
+.trigger[aria-expanded='true'] {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.trigger[aria-expanded='true'] {
+  background: #f1eee6;
+}
+
+/* Панель растягивается на всю ширину шапки.
+   Шапка задаёт position: relative, поэтому отсчёт идёт от неё. */
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding: 0 var(--page-x);
+}
+
+.grid {
+  max-width: calc(var(--container) - 48px);
+  margin: 8px auto 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-menu);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px 24px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.subs {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
