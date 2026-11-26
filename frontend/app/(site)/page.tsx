@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import ProjectRow from '@/components/ProjectRow';
-import PeriodTabs from '@/components/PeriodTabs';
+import HeroBanner from '@/components/HeroBanner';
+import { Award, ShieldCheck } from 'lucide-react';
+import TopFeed from '@/components/TopFeed';
 import WaitlistForm from '@/components/WaitlistForm';
 import { categories } from '@/lib/categories';
 import { topProjects } from '@/lib/mock';
@@ -12,6 +13,9 @@ export default function HomePage() {
 
   return (
     <main id="main">
+      {/* ---------- Баннер-карусель: проекты дня и промо ---------- */}
+      <HeroBanner />
+
       {/* ---------- Первый экран: заголовок и лента топа ---------- */}
       <section id="top" className={styles.hero}>
         <div className={styles.heroText}>
@@ -20,7 +24,9 @@ export default function HomePage() {
           <h1 className={styles.title}>
             Покажи, что ты сделал.
             <br />
-            <span className={styles.titleAccent}>Пусть страна увидит.</span>
+            <span className={styles.titleAccent}>
+              Пусть страна <span className={styles.marker}>увидит.</span>
+            </span>
           </h1>
 
           <p className={styles.lead}>
@@ -42,19 +48,18 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div id="feed" className={styles.feed}>
-          <div className={styles.feedHead}>
-            <h2 className={styles.feedTitle}>Топ сегодня</h2>
-            <PeriodTabs />
-          </div>
+        <div className={styles.feedArea}>
+          <TopFeed projects={feed} />
 
-          {feed.map((project) => (
-            <ProjectRow key={project.slug} project={project} variant="feed" />
-          ))}
-
-          <p className={styles.disclaimer}>
-            Пример ленты: проекты и цифры условные
-          </p>
+          {/* Плавающие плашки вокруг ленты — декор, смысл есть и в тексте ниже */}
+          <span className={`${styles.floatChip} ${styles.floatChipTop}`} aria-hidden="true">
+            <ShieldCheck size={16} />
+            Один аккаунт — один голос
+          </span>
+          <span className={`${styles.floatChip} ${styles.floatChipBottom}`} aria-hidden="true">
+            <Award size={16} />
+            Бейдж для портфолио
+          </span>
         </div>
       </section>
 
@@ -149,7 +154,10 @@ export default function HomePage() {
       <section className={styles.ctaWrap}>
         <div className={styles.cta}>
           <div className={styles.ctaText}>
-            <h2 className={styles.ctaTitle}>Собираем первые проекты к запуску</h2>
+            <h2 className={styles.ctaTitle}>
+              Собираем первые проекты{' '}
+              <span className={styles.ctaAccent}>к запуску</span>
+            </h2>
             <p className={styles.ctaLead}>
               Оставь контакт, и мы позовём тебя разместить проект одним из первых.
             </p>

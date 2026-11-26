@@ -1,0 +1,351 @@
+/* ============================================================
+   «Топ сегодня» на первом экране
+   ============================================================ */
+
+/* Обёртка: за карточкой — две «призрачные» карточки веером и свечение */
+.stack {
+  position: relative;
+  flex: 1 1 440px;
+  min-width: 0;
+  isolation: isolate;
+}
+
+.stack::before,
+.stack::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--r-2xl);
+  border: 1px solid var(--border);
+}
+
+.stack::before {
+  background: linear-gradient(135deg, #ffe3d4, #fff3ea);
+  transform: rotate(-4deg) translate(-10px, 10px);
+}
+
+.stack::after {
+  background: linear-gradient(135deg, #f7d9c9, #fbe7dc);
+  transform: rotate(2.5deg) translate(10px, 14px);
+  opacity: 0.8;
+}
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-2xl);
+  padding: 24px;
+  box-shadow:
+    0 30px 60px -20px rgba(185, 62, 14, 0.25),
+    0 12px 24px rgba(17, 20, 24, 0.06);
+  /* Якорь #feed не прячется под шапку */
+  scroll-margin-top: 24px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Пульсирующая точка «в эфире» */
+.live {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e8693a;
+}
+
+.live::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #e8693a;
+  animation: pulse 1.8s ease-out infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+/* Строки въезжают снизу по очереди — задержка задаётся в style */
+.leader,
+.row {
+  animation: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Лидер ---------- */
+
+.leader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 16px 18px;
+  border-radius: var(--r-lg);
+  /* Золотая рамка градиентом: два фона, внешний виден только по краю */
+  border: 2px solid transparent;
+  background:
+    linear-gradient(135deg, #fffaf3, #fff4ec) padding-box,
+    linear-gradient(135deg, #f5c76b, #e8693a, #f5c76b) border-box;
+  margin-bottom: 4px;
+}
+
+.crown {
+  position: absolute;
+  top: -12px;
+  left: 18px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5c76b, #e8693a);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(232, 105, 58, 0.4);
+}
+
+.logoBig,
+.logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  box-shadow: 0 8px 18px -6px rgba(17, 20, 24, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.logoBig {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  font-size: 28px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-size: 20px;
+}
+
+.leader:hover .logoBig,
+.row:hover .logo {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.leaderBadge {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.leaderName {
+  display: block;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.name {
+  display: block;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.leaderName:hover,
+.name:hover {
+  color: var(--accent);
+}
+
+.tagline {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.chips {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: #fff;
+  border: 1px solid #f1d9cb;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ---------- Остальные места ---------- */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 12px 12px 8px;
+  border-radius: var(--r-lg);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.row:hover {
+  background: var(--surface-soft);
+  transform: translateX(4px);
+}
+
+.place {
+  flex: none;
+  width: 26px;
+  text-align: center;
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+/* Серебро и бронза */
+.place[data-place='2'] {
+  color: #7d8590;
+}
+
+.place[data-place='3'] {
+  color: #a8652a;
+}
+
+.bar {
+  display: block;
+  margin-top: 8px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--surface-muted);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #e8693a, #f5c76b);
+  transform-origin: left;
+  animation: grow 0.9s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.disclaimer {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row:hover {
+    transform: none;
+  }
+
+  .leader:hover .logoBig,
+  .row:hover .logo {
+    transform: none;
+  }
+}
+
+/* ---------- Телефон ---------- */
+
+@media (max-width: 600px) {
+  .card {
+    padding: 18px 14px;
+  }
+
+  /* Веер за карточкой на узком экране вылезает за края — убираем */
+  .stack::before,
+  .stack::after {
+    display: none;
+  }
+
+  .leader {
+    gap: 12px;
+    padding: 18px 12px 14px;
+  }
+
+  .logoBig {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .row {
+    gap: 10px;
+    padding: 10px 6px 10px 2px;
+  }
+
+  .logo {
+    width: 42px;
+    height: 42px;
+  }
+}

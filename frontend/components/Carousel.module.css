@@ -1,0 +1,189 @@
+/* ============================================================
+   Карусель: лента со scroll-snap, стрелки, точки с прогрессом
+   ============================================================ */
+
+.root {
+  position: relative;
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  background: var(--dark);
+  /* Изоляция: z-index стрелок не спорит с шапкой и меню */
+  isolation: isolate;
+}
+
+.track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  /* grid растягивает содержимое слайда на всю высоту ленты */
+  display: grid;
+  scroll-snap-align: start;
+  scroll-snap-stop: always; /* быстрый свайп не перескакивает через слайд */
+}
+
+/* ---------- Стрелки ---------- */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--r-pill);
+  background: rgba(17, 20, 24, 0.35);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background 0.15s ease;
+}
+
+.prev {
+  left: 16px;
+}
+
+.next {
+  right: 16px;
+}
+
+/* Стрелки появляются при наведении; с клавиатуры видны всегда, когда в фокусе */
+.root:hover .arrow,
+.arrow:focus-visible {
+  opacity: 1;
+}
+
+.arrow:hover {
+  background: rgba(17, 20, 24, 0.6);
+}
+
+/* На тачскринах наведения нет: там листают пальцем, стрелки не нужны */
+@media (hover: none) {
+  .arrow {
+    display: none;
+  }
+}
+
+/* ---------- Точки и пауза ---------- */
+
+.controls {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 2;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(17, 20, 24, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot,
+.dotActive {
+  position: relative;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition:
+    width 0.3s ease,
+    background 0.15s ease;
+}
+
+/* Невидимая зона вокруг точки: попасть пальцем в 8px трудно */
+.dot::before,
+.dotActive::before {
+  content: '';
+  position: absolute;
+  inset: -10px -3px;
+}
+
+.dot {
+  width: 8px;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.dotActive {
+  width: 36px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Без автопрокрутки активная точка просто белая */
+.dotActive:not(:has(.progress)) {
+  background: #fff;
+}
+
+.progress {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #fff;
+  transform-origin: left;
+  animation-name: fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.pause {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pause:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.arrow:focus-visible,
+.dot:focus-visible,
+.dotActive:focus-visible,
+.pause:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
