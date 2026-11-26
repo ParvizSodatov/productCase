@@ -12,6 +12,37 @@
   border-top: 1px solid var(--border-soft);
 }
 
+/* Под курсором строка слегка подсвечивается. Подсветка — отдельный
+   слой (::before) шире строки: так разделительная линия остаётся прямой,
+   а текст не сдвигается с вертикали страницы. */
+.rowFeed,
+.rowList {
+  position: relative;
+  isolation: isolate;
+}
+
+.rowFeed::before,
+.rowList::before {
+  content: '';
+  position: absolute;
+  inset: 4px -12px;
+  z-index: -1;
+  border-radius: var(--r-md);
+  background: var(--surface-soft);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.rowFeed:hover::before,
+.rowList:hover::before {
+  opacity: 1;
+}
+
+.rowFeed:hover .name,
+.rowList:hover .name {
+  color: var(--accent);
+}
+
 /* Список в категории: разделитель снизу, свободнее */
 .rowList {
   padding: 18px 0;

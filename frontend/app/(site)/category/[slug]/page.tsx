@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import EmptyState from '@/components/EmptyState';
 import ProjectRow from '@/components/ProjectRow';
 import PeriodTabs from '@/components/PeriodTabs';
 import SubcategoryFilter from '@/components/SubcategoryFilter';
@@ -63,7 +64,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const related = [1, 2, 3].map((step) => categories[(index + step) % categories.length]);
 
   return (
-    <main className={styles.main}>
+    <main id="main" className={styles.main}>
       <p className={styles.crumbs}>
         <Link href="/">Главная</Link> / <Link href="/#categories">Категории</Link> /{' '}
         {category.name}
@@ -86,13 +87,19 @@ export default async function CategoryPage({ params }: PageProps) {
               <ProjectRow key={project.slug} project={project} variant="list" />
             ))
           ) : (
-            <p className={styles.empty}>
-              В этой категории пока нет проектов.{' '}
-              <Link href="/submit" className={styles.emptyLink}>
-                Опубликуй первый
+            <EmptyState
+              illustration="projects"
+              title="Пока нет проектов в этой категории"
+              text={`Станьте первым, кто покажет свой проект в категории «${category.name}».`}
+              headingLevel={3}
+            >
+              <Link href="/submit" className="btn btnPrimary">
+                Опубликовать проект
               </Link>
-              .
-            </p>
+              <Link href="/#categories" className="btn btnSecondary">
+                Другие категории
+              </Link>
+            </EmptyState>
           )}
 
           <p className={styles.disclaimer}>Пример: проекты и цифры условные</p>

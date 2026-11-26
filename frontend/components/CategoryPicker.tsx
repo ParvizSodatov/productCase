@@ -9,38 +9,45 @@
  * можно отправить запрос напрямую и прицепить проект ко всем категориям.
  */
 
-import { useState } from 'react';
 import { categories } from '@/lib/categories';
+import { PROJECT_LIMITS } from '@/lib/validation';
 import styles from './CategoryPicker.module.css';
 
-const MAX_CATEGORIES = 3;
+const MAX_CATEGORIES = PROJECT_LIMITS.categories;
 
-export default function CategoryPicker() {
-  const [picked, setPicked] = useState<string[]>(['bots', 'ai']);
+type CategoryPickerProps = {
+  value: string[];
+  onChange: (value: string[]) => void;
+  error?: string;
+};
 
+export default function CategoryPicker({ value, onChange, error }: CategoryPickerProps) {
   function toggle(slug: string) {
-    setPicked((current) => {
-      if (current.includes(slug)) {
-        return current.filter((item) => item !== slug);
-      }
-      if (current.length >= MAX_CATEGORIES) {
-        return current;
-      }
-      return [...current, slug];
-    });
+    if (value.includes(slug)) {
+      onChange(value.filter((item) => item !== slug));
+    } else if (value.length < MAX_CATEGORIES) {
+      onChange([...value, slug]);
+    }
   }
 
-  const limitReached = picked.length >= MAX_CATEGORIES;
+  const limitReached = value.length >= MAX_CATEGORIES;
 
   return (
-    <fieldset className={styles.fieldset}>
+    <fieldset
+      id="categories"
+      className={styles.fieldset}
+      aria-describedby={error ? 'categories-error' : undefined}
+      // fieldset сам по себе не фокусируется — tabIndex нужен, чтобы
+      // ссылка из сводки ошибок могла перевести на него фокус
+      tabIndex={-1}
+    >
       <legend className={styles.legend}>
         Категории <span className={styles.hint}>(до {MAX_CATEGORIES})</span>
       </legend>
 
       <div className={styles.row}>
         {categories.map((category) => {
-          const on = picked.includes(category.slug);
+          const on = value.includes(category.slug);
           return (
             <button
               key={category.slug}
@@ -58,11 +65,16 @@ export default function CategoryPicker() {
         })}
       </div>
 
-      {limitReached && (
-        <p className={styles.limit} role="status">
-          Выбрано {MAX_CATEGORIES} категории — больше нельзя. Сними одну, чтобы
-          выбрать другую.
+      {error ? (
+        <p id="categories-error" className={styles.error}>
+          {error}
         </p>
+      ) : (
+        limitReached && (
+          <p className={styles.limit} role="status">
+            Выбрано {MAX_CATEGORIES} категории — больше нельзя. Сними одну, чтобы выбрать другую.
+          </p>
+        )
       )}
     </fieldset>
   );

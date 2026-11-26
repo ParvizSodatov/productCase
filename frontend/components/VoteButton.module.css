@@ -57,3 +57,88 @@
 .largeVoted:hover {
   background: #22262c;
 }
+
+/* --- Анимация --- */
+
+.arrow {
+  display: inline-flex;
+}
+
+/* В списке стрелка акцентная, на крупной кнопке — белая (currentColor) */
+.compact .arrow {
+  color: var(--accent);
+}
+
+/* Подпрыгивание стрелки: вверх, чуть вниз, на место */
+.bounce {
+  animation: bounce 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-7px) scale(1.15);
+  }
+  70% {
+    transform: translateY(1px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Окно для цифры: лишнее при прокрутке обрезается */
+.numberWrap {
+  display: inline-flex;
+  overflow: hidden;
+  /* Цифры одной ширины — кнопка не дёргается, когда 99 становится 100 */
+  font-variant-numeric: tabular-nums;
+}
+
+.number {
+  display: inline-block;
+}
+
+.rollUp {
+  animation: rollUp 0.28s ease-out;
+}
+
+.rollDown {
+  animation: rollDown 0.28s ease-out;
+}
+
+@keyframes rollUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes rollDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Нажатие чувствуется пальцем: кнопка чуть проседает */
+.compact:active,
+.large:active {
+  transform: scale(0.97);
+}
+
+.compact,
+.large {
+  /* Без задержки на двойной тап (масштабирование) на телефоне */
+  touch-action: manipulation;
+}

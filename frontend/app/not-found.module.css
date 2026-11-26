@@ -1,70 +1,96 @@
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  padding: 16px var(--page-x);
-}
-
 .main {
-  flex: 1 1 auto;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px var(--page-x) 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 40px var(--page-x) 80px;
 }
 
 .code {
-  margin: 0;
-  font-family: var(--font-manrope), sans-serif;
-  font-weight: 800;
-  font-size: 64px;
+  margin: 16px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--accent);
-  line-height: 1;
 }
 
 .title {
-  margin: 16px 0 0;
-  font-size: 32px;
+  margin: 8px 0 0;
+  font-size: 40px;
   font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .lead {
-  margin: 10px 0 0;
+  margin: 12px 0 0;
   font-size: 17px;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
 .actions {
-  margin-top: 32px;
+  margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
 }
 
-.primary,
-.secondary {
-  padding: 16px 24px;
+.actions :global(.btn) {
+  min-height: 50px;
+  padding: 0 24px;
+}
+
+.search {
+  position: relative;
+  margin-top: 28px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px 0 42px;
+  border: 1px solid var(--border-field);
   border-radius: var(--r-md);
-  font-size: 16px;
-  font-weight: 600;
+  background: var(--surface);
+  color: var(--text);
+  font: 15px var(--font-inter), sans-serif;
 }
 
-.primary {
-  background: var(--accent);
-  color: var(--on-accent);
+.searchInput::placeholder {
+  color: var(--text-muted);
 }
 
-.primary:hover {
-  background: #a53709;
-  color: var(--on-accent);
+.searchInput:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
 }
 
-.secondary {
-  border: 1px solid var(--border-input);
+@media (max-width: 600px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actions :global(.btn) {
+    flex: 1 1 100%;
+  }
 }

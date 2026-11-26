@@ -1,0 +1,99 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  font: 500 14px var(--font-inter), sans-serif;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.trigger:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.dialog {
+  width: min(440px, calc(100% - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 24px 64px rgba(17, 20, 24, 0.25);
+}
+
+.dialog::backdrop {
+  background: rgba(17, 20, 24, 0.5);
+}
+
+.body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.reasons {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+}
+
+.option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+.option:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.optionOn {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.error {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--danger);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .actions :global(.btn) {
+    flex: 1 1 0;
+  }
+}

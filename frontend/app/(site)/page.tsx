@@ -11,7 +11,7 @@ export default function HomePage() {
   const feed = topProjects(4);
 
   return (
-    <main>
+    <main id="main">
       {/* ---------- Первый экран: заголовок и лента топа ---------- */}
       <section id="top" className={styles.hero}>
         <div className={styles.heroText}>

@@ -1,0 +1,107 @@
+.main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 40px var(--page-x) 80px;
+}
+
+.narrow {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px var(--page-x) 80px;
+}
+
+.gapTop {
+  margin-top: 20px;
+}
+
+.gapSmall {
+  margin-top: 12px;
+}
+
+.gapTopLarge {
+  margin-top: 40px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+}
+
+.pills {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.head {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+}
+
+.headText {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gallery {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.shot {
+  aspect-ratio: 16 / 10;
+}
+
+.columns {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.content {
+  flex: 999 1 560px;
+  min-width: 0;
+}
+
+.aside {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.lines {
+  margin: 16px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cards {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery > :last-child {
+    display: none;
+  }
+}

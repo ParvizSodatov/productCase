@@ -1,0 +1,160 @@
+.wrap {
+  position: relative;
+}
+
+/* Иконка-кнопка 44×44 — удобная цель для пальца */
+.trigger {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.trigger:hover,
+.trigger[aria-expanded='true'] {
+  background: var(--surface-muted);
+}
+
+.count {
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--bg);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  width: min(380px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-menu);
+  overflow: hidden;
+  animation: panelIn 0.16s ease-out;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.readAll {
+  border: 0;
+  background: transparent;
+  padding: 6px 8px;
+  margin: -6px -8px;
+  border-radius: var(--r-sm);
+  font: 600 13px var(--font-inter), sans-serif;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.readAll:hover {
+  background: var(--accent-soft);
+}
+
+.list {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  max-height: min(420px, 70vh);
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-strong);
+}
+
+.item:hover {
+  background: var(--surface-soft);
+  color: var(--text-strong);
+}
+
+.unread {
+  background: var(--accent-soft);
+}
+
+.unread:hover {
+  background: #fbe9df;
+}
+
+.itemText {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.when {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* На телефоне колокольчик стоит не у самого края, и панель от него
+   вылезла бы за левую границу экрана. Растягиваем её от края до края. */
+@media (max-width: 900px) {
+  .panel {
+    position: fixed;
+    top: 68px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+}

@@ -1,8 +1,8 @@
 .header {
   border-bottom: 1px solid var(--border);
   background: var(--bg);
-  /* position и z-index нужны выпадающему меню категорий:
-     оно позиционируется относительно шапки и лежит поверх страницы */
+  /* position и z-index нужны выпадающим панелям: меню категорий
+     и бургер позиционируются относительно шапки и лежат поверх страницы */
   position: relative;
   z-index: 5;
 }
@@ -10,21 +10,41 @@
 .nav {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 16px var(--page-x);
+  padding: 14px var(--page-x);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 16px 32px;
 }
 
 .links {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 8px 24px;
   font-size: 15px;
   /* Забирает свободное место, прижимая кнопки справа к краю */
   flex: 1 1 auto;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: background 0.15s ease;
+}
+
+.iconBtn:hover {
+  background: var(--surface-muted);
+  color: var(--text);
 }
 
 .actions {
@@ -46,6 +66,7 @@
   border-radius: 10px;
   font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .cta:hover {
@@ -53,20 +74,69 @@
   background: #22262c;
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  flex: none;
-  border-radius: var(--r-pill);
-  background: var(--dark);
-  color: var(--on-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
+/* --- Содержимое бургер-меню --- */
+
+.mobileList,
+.mobileCategories {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.avatar:hover {
-  color: var(--on-dark);
+/* Пункты высотой 48px: в них легко попасть пальцем */
+.mobileList a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: 17px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.mobileHeading {
+  margin: 24px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-inter), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.mobileCategories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+.mobileCategories a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.mobileActions {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileActions > * {
+  min-height: 50px;
+}
+
+/* --- Узкие экраны: бургер вместо полного меню --- */
+
+@media (max-width: 900px) {
+  .links,
+  .desktopOnly {
+    display: none;
+  }
+
+  .nav {
+    justify-content: space-between;
+    padding-block: 12px;
+  }
 }

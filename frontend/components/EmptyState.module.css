@@ -1,0 +1,47 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 24px;
+  border: 1px dashed var(--border-input);
+  border-radius: var(--r-xl);
+  background: var(--surface-soft);
+}
+
+.compact {
+  padding: 24px 16px;
+  border: 0;
+  background: transparent;
+}
+
+.title {
+  margin: 16px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.compact .title {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.text {
+  max-width: 420px;
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.compact .text {
+  font-size: 14px;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}

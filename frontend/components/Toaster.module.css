@@ -1,0 +1,83 @@
+/* Внизу по центру: не перекрывает шапку и кнопки в правом углу */
+.region {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: min(440px, calc(100% - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Пустой контейнер не должен мешать кликать по странице */
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 8px 12px 16px;
+  border-radius: var(--r-md);
+  background: var(--dark);
+  color: var(--on-dark);
+  box-shadow: var(--shadow-menu);
+  font-size: 15px;
+  animation: toastIn 0.22s ease-out;
+}
+
+/* Цвет иконки — подсказка, а не единственный носитель смысла: текст тоста
+   говорит сам за себя. Светлые оттенки на тёмном фоне, контраст от 4.5:1 */
+.success .icon {
+  color: #6fcf97;
+}
+
+.info .icon {
+  color: var(--on-dark-muted);
+}
+
+.error .icon {
+  color: #ff8a7a;
+}
+
+.icon {
+  flex: none;
+}
+
+.text {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.4;
+}
+
+/* Крестик 32×32 — в него легко попасть пальцем */
+.close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--on-dark-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--dark-surface);
+  color: var(--on-dark);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

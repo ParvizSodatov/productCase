@@ -1,0 +1,160 @@
+.main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px var(--page-x) 80px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+
+.mark {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: var(--r-md);
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+}
+
+.name {
+  margin: 0;
+  font-size: 17px;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+}
+
+.tagline {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.meta {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.reason {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--danger-bg);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-strong);
+}
+
+.reason strong {
+  color: var(--danger);
+}
+
+.actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actions:empty {
+  display: none;
+}
+
+.votes {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding-top: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .head :global(.btn) {
+    width: 100%;
+  }
+
+  .row {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+
+  .body {
+    flex-basis: calc(100% - 68px);
+  }
+
+  /* Кнопки — отдельной строкой во всю ширину, под пальцем */
+  .actions {
+    flex-basis: 100%;
+    justify-content: flex-end;
+  }
+
+  .actions :global(.btn) {
+    min-height: 44px;
+    flex: 1 1 auto;
+  }
+}

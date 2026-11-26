@@ -1,10 +1,11 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Triangle } from 'lucide-react';
+import Link from 'next/link';
+import Avatar from '@/components/Avatar';
+import EmptyState from '@/components/EmptyState';
 import ProfileTabs from '@/components/ProfileTabs';
-import { findCategory } from '@/lib/categories';
-import { author, projects } from '@/lib/mock';
+import ProjectCard from '@/components/ProjectCard';
+import { authors, findAuthor, projects } from '@/lib/mock';
 import styles from './page.module.css';
 
 type PageProps = { params: Promise<{ username: string }> };
@@ -13,13 +14,14 @@ type PageProps = { params: Promise<{ username: string }> };
 export const instant = false;
 
 export function generateStaticParams() {
-  return [{ username: author.username }];
+  return authors.map((person) => ({ username: person.username }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { username } = await params;
+  const author = findAuthor(username);
 
-  if (username !== author.username) return { title: 'Профиль не найден' };
+  if (!author) return { title: 'Профиль не найден' };
 
   return {
     title: author.name,
@@ -35,56 +37,50 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProfilePage({ params }: PageProps) {
   const { username } = await params;
 
-  // Пока в заглушках один автор. С бэкендом здесь будет запрос в базу.
-  if (username !== author.username) notFound();
+  // С бэкендом здесь будет запрос в базу
+  const author = findAuthor(username);
 
-  const ownProjects = projects.filter((p) => p.authorUsername === author.username);
+  if (!author) notFound();
 
-  /* Сетка проектов автора */
-  const projectsTab = (
-    <div className={styles.grid}>
-      {ownProjects.map((project) => {
-        const categoryNames = project.categorySlugs
-          .map((slug) => findCategory(slug)?.name)
-          .filter(Boolean)
-          .join(' · ');
+  const ownProjects = projects.filter((p) => p.makers.includes(author.username));
 
-        return (
-          <Link
-            key={project.slug}
-            href={`/project/${project.slug}`}
-            className={styles.card}
-          >
-            <div className={styles.cover}>Обложка проекта</div>
-            <div className={styles.cardBody}>
-              <div className={styles.cardTop}>
-                <span className={styles.cardName}>{project.name}</span>
-                <span className={styles.cardVotes}>
-                  <Triangle size={11} fill="currentColor" aria-hidden="true" />
-                  {project.votes}
-                </span>
-              </div>
-              <div className={styles.cardTagline}>{project.tagline}</div>
-              <div className={styles.cardCategories}>{categoryNames}</div>
-            </div>
+  /* Сетка проектов, в которых человек среди создателей */
+  const projectsTab =
+    ownProjects.length > 0 ? (
+      <div className={styles.grid}>
+        {ownProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
+    ) : (
+      <div className={styles.emptyWrap}>
+        <EmptyState
+          illustration="projects"
+          title="Пока нет опубликованных проектов"
+          text="Когда проекты пройдут модерацию, они появятся здесь."
+          headingLevel={3}
+        >
+          <Link href="/submit" className="btn btnPrimary">
+            Опубликовать проект
           </Link>
-        );
-      })}
+        </EmptyState>
+      </div>
+    );
+
+  const votedTab = (
+    <div className={styles.emptyWrap}>
+      <EmptyState
+        illustration="projects"
+        title="Здесь будут проекты, за которые проголосовал автор"
+        headingLevel={3}
+      />
     </div>
   );
 
-  const votedTab = (
-    <p className={styles.emptyTab}>
-      Здесь будут проекты, за которые проголосовал автор.
-    </p>
-  );
-
   return (
-    <main className={styles.main}>
+    <main id="main" className={styles.main}>
       <section className={styles.header}>
-        <div className={styles.avatar} aria-hidden="true">
-          {author.initials}
-        </div>
+        <Avatar name={author.name} size={96} />
 
         <div className={styles.headerText}>
           <h1 className={styles.name}>{author.name}</h1>

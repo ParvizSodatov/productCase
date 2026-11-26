@@ -1,35 +1,99 @@
 .footer {
   border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-muted);
 }
 
 .inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 32px var(--page-x);
+  padding: 40px var(--page-x) 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 32px;
+}
+
+.brandCol {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px 32px;
-  justify-content: space-between;
-  font-size: 14px;
-  color: var(--text-muted);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .brand {
   font-family: var(--font-manrope), sans-serif;
   font-weight: 800;
+  font-size: 18px;
   color: var(--text);
 }
 
-.links {
+.tagline {
+  margin: 0 0 4px;
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.colTitle {
+  margin: 0 0 8px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+/* Высота 36px у ссылок — чтобы на телефоне не промахиваться */
+.col a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.col a:hover {
+  color: var(--accent);
+}
+
+.bottom {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 16px var(--page-x) 28px;
+  border-top: 1px solid var(--border-soft);
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 8px 24px;
+  font-size: 13px;
 }
 
-.links a {
-  color: var(--text-muted);
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+  }
 }
 
-.links a:hover {
-  color: var(--accent);
+/* На телефоне «Площадка» и «О нас» — две колонки рядом, иначе подвал
+   растягивается на полтора экрана. Контакты с длинной почтой — во всю ширину. */
+@media (max-width: 480px) {
+  .inner {
+    gap: 24px 16px;
+  }
+
+  .col:last-child {
+    grid-column: 1 / -1;
+  }
 }

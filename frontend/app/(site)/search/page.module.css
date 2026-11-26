@@ -1,0 +1,108 @@
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px var(--page-x) 80px;
+}
+
+.title {
+  margin: 0 0 20px;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.form {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 54px;
+  padding: 0 16px 0 46px;
+  border: 1px solid var(--border-field);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font: 16px var(--font-inter), sans-serif;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+.form :global(.btn) {
+  min-height: 54px;
+  padding: 0 24px;
+}
+
+.suggest {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.suggestLabel {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  font-size: 14px;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+}
+
+.results {
+  margin-top: 28px;
+}
+
+.count {
+  margin: 0 0 4px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding-top: 32px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .form :global(.btn) {
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,57 @@
+.wrap {
+  display: none;
+}
+
+.trigger {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.trigger[aria-expanded='true'] {
+  background: var(--surface-muted);
+}
+
+/* Панель от низа шапки до низа экрана. Шапка — position: relative,
+   поэтому top: 100% отсчитывается от неё. */
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: calc(100dvh - 100%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 8px var(--page-x) 32px;
+  animation: menuIn 0.18s ease-out;
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    display: block;
+  }
+}

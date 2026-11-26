@@ -1,0 +1,77 @@
+.main {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 48px var(--page-x) 80px;
+}
+
+.title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.lead {
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+}
+
+.section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.sectionTitle {
+  margin: 0 0 16px;
+  font-size: 24px;
+}
+
+.sub {
+  margin: 24px 0 8px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.note {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.note a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+}
+
+.avatarItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}

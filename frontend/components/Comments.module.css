@@ -1,0 +1,128 @@
+.title {
+  margin: 40px 0 16px;
+  font-size: 22px;
+}
+
+/* --- Форма --- */
+
+.form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.field {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-field);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font: 15px/1.45 var(--font-inter), sans-serif;
+  resize: vertical;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 0;
+}
+
+.inputError {
+  border-color: var(--danger);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 22px;
+  padding-top: 4px;
+  font-size: 13px;
+}
+
+.error {
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.counter {
+  color: var(--text-muted);
+}
+
+.form :global(.btn) {
+  min-height: 48px;
+}
+
+/* --- Список --- */
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comment {
+  display: flex;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.commentMeta {
+  font-size: 14px;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.when {
+  color: var(--text-muted);
+}
+
+.text {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-strong);
+  /* Длинная ссылка без пробелов не должна разрывать раскладку */
+  overflow-wrap: break-word;
+}
+
+.delete {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.delete:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}

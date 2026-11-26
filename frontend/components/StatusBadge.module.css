@@ -1,0 +1,31 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Пары цветов проверены: контраст текста к фону от 5.3:1 */
+.draft {
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.pending {
+  background: var(--warning-bg);
+  color: var(--warning);
+}
+
+.published {
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.rejected {
+  background: var(--danger-bg);
+  color: var(--danger);
+}

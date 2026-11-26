@@ -70,17 +70,6 @@
   font-weight: 700;
 }
 
-.empty {
-  margin: 32px 0 0;
-  font-size: 16px;
-  color: var(--text-muted);
-}
-
-.emptyLink {
-  color: var(--accent);
-  font-weight: 600;
-}
-
 .disclaimer {
   margin: 12px 0 0;
   font-size: 12px;

@@ -1,0 +1,13 @@
+.avatar {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  color: #ffffff;
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  object-fit: cover;
+  user-select: none;
+}

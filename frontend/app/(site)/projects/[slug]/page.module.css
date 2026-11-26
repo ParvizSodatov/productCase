@@ -77,12 +77,18 @@
   color: var(--text-secondary);
 }
 
-.badgeOutline {
+.badge:hover {
+  color: var(--accent);
+}
+
+/* Пометка цены — выделена акцентом, чтобы не путалась с категориями */
+.pricing {
   padding: 4px 12px;
-  border: 1px solid var(--border);
+  background: #fdf3ee;
   border-radius: var(--r-pill);
   font-size: 13px;
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: var(--accent);
 }
 
 .headActions {
@@ -95,6 +101,7 @@
 .openBtn {
   display: flex;
   align-items: center;
+  gap: 8px;
   padding: 0 22px;
   height: 54px;
   border: 1px solid var(--border-input);
@@ -103,25 +110,31 @@
   font-weight: 600;
 }
 
-/* --- Скриншоты --- */
+/* --- Голос и место в рейтинге --- */
 
-.shots {
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+.voteBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
-.shot {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--r-lg);
-  background: var(--placeholder);
-  border: 1px solid #ddd9ce;
-  display: flex;
+.rank {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  color: var(--text-muted);
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.shareRow {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* --- Колонки --- */
@@ -144,63 +157,30 @@
   font-size: 22px;
 }
 
-.sectionTitleSpaced {
-  margin: 40px 0 16px;
-  font-size: 22px;
-}
-
 .about {
-  margin: 0;
+  margin: 0 0 14px;
   font-size: 16px;
   line-height: 1.65;
   color: var(--text-strong);
 }
 
-/* --- Комментарии --- */
+/* --- Теги --- */
 
-.comment {
+.tags {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
   display: flex;
-  gap: 12px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border-soft);
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.commentAvatar {
-  width: 40px;
-  height: 40px;
-  flex: none;
+.tag {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
   border-radius: var(--r-pill);
-  background: var(--surface-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.commentBody {
-  min-width: 0;
-}
-
-.commentMeta {
-  font-size: 14px;
-}
-
-.commentName {
-  font-weight: 600;
-}
-
-.commentWhen {
-  color: var(--text-muted);
-}
-
-.commentText {
-  margin: 4px 0 0;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--text-strong);
-  /* Длинная ссылка без пробелов не должна разрывать раскладку */
-  overflow-wrap: break-word;
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
 /* --- Боковая панель --- */
@@ -213,42 +193,67 @@
   gap: 16px;
 }
 
-.authorCard {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+.card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 20px;
-  transition: border-color 0.15s ease;
 }
 
-.authorCard:hover {
-  border-color: var(--accent);
-}
-
-.authorAvatar {
-  width: 48px;
-  height: 48px;
-  flex: none;
-  border-radius: var(--r-pill);
-  background: var(--dark);
-  color: var(--on-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.cardTitle {
+  margin: 0 0 12px;
+  font-size: 13px;
   font-weight: 600;
+  font-family: var(--font-inter), sans-serif;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.authorLabel {
+/* --- Создатели --- */
+
+.makers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.maker {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px;
+  margin: 0 -8px;
+  border-radius: var(--r-md);
+  transition: background 0.15s ease;
+}
+
+.maker:hover {
+  background: var(--surface-soft);
+}
+
+.maker:hover .makerName {
+  color: var(--accent);
+}
+
+.makerText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.makerName {
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.15s ease;
+}
+
+.makerRole {
   font-size: 13px;
   color: var(--text-muted);
-}
-
-.authorName {
-  font-weight: 600;
-  font-size: 16px;
 }
 
 .infoCard {
@@ -269,6 +274,21 @@
   color: var(--accent);
   font-weight: 600;
   overflow-wrap: break-word;
+}
+
+/* --- Похожие проекты --- */
+
+.similar {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+
+.similarGrid {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .disclaimer {
@@ -292,6 +312,18 @@
 
   .headActions {
     width: 100%;
+  }
+
+  /* На телефоне кнопки во всю ширину — по ним проще попасть пальцем */
+  .openBtn,
+  .voteBox {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .voteBox > button {
+    width: 100%;
+    justify-content: center;
   }
 
   .columns {

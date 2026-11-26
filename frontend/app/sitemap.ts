@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { categories } from '@/lib/categories';
 import { projects } from '@/lib/mock';
+import { projectPath, siteUrl } from '@/lib/site';
 
 /**
  * Карта сайта: /sitemap.xml.
@@ -11,7 +12,6 @@ import { projects } from '@/lib/mock';
  *
  * priority — подсказка о важности страницы относительно других на сайте.
  */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 1,
     },
+    ...['/about', '/rules'].map((path) => ({
+      url: `${siteUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
+    })),
     ...categories.map((category) => ({
       url: `${siteUrl}/category/${category.slug}`,
       lastModified: now,
@@ -30,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     ...projects.map((project) => ({
-      url: `${siteUrl}/project/${project.slug}`,
+      url: `${siteUrl}${projectPath(project.slug)}`,
       lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: 0.7,

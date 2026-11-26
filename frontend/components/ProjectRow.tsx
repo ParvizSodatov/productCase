@@ -2,6 +2,7 @@ import Link from 'next/link';
 import VoteButton from './VoteButton';
 import { findCategory } from '@/lib/categories';
 import type { Project } from '@/lib/mock';
+import { projectPath } from '@/lib/site';
 import styles from './ProjectRow.module.css';
 
 type ProjectRowProps = {
@@ -24,7 +25,7 @@ export default function ProjectRow({ project, variant = 'feed' }: ProjectRowProp
   return (
     <div className={variant === 'feed' ? styles.rowFeed : styles.rowList}>
       <Link
-        href={`/project/${project.slug}`}
+        href={projectPath(project.slug)}
         className={variant === 'feed' ? styles.markFeed : styles.markList}
         aria-hidden="true"
         tabIndex={-1}
@@ -33,7 +34,7 @@ export default function ProjectRow({ project, variant = 'feed' }: ProjectRowProp
       </Link>
 
       <div className={styles.body}>
-        <Link href={`/project/${project.slug}`} className={styles.name}>
+        <Link href={projectPath(project.slug)} className={styles.name}>
           {project.name}
         </Link>
         <div className={styles.tagline}>{project.tagline}</div>

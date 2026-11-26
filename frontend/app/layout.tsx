@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Manrope, Inter } from 'next/font/google';
+import { ToastProvider } from '@/components/Toaster';
+import { siteUrl } from '@/lib/site';
 import './globals.css';
 
 /**
@@ -25,9 +27,6 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
-
-/** Адрес сайта. Нужен, чтобы og-ссылки были абсолютными. */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 /**
  * Мета-теги по умолчанию. Каждая страница дополняет их своими —
@@ -66,7 +65,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru" className={`${manrope.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* Ссылка для клавиатуры: первый Tab на странице предлагает
+            пропустить шапку и сразу попасть к содержимому */}
+        <a href="#main" className="skipLink">
+          Перейти к содержимому
+        </a>
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }
